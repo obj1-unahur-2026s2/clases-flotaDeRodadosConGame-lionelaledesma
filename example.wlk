@@ -1,9 +1,8 @@
-object pepita {
-  var energy = 100
-
-  method energy() = energy
-
-  method fly(minutes) {
-    energy = energy - minutes * 3
-  }
+class Rodado {
+   var capacidad 
+   var velocidadMaxima
+   var color
+   var peso
 }
+
+const chevroletCorsa = new Rodado(4, 150, negro, 1300)
