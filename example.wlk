@@ -1,8 +1,15 @@
-class Rodado {
-   var capacidad 
-   var velocidadMaxima
+class ChevroletCorsa {
+   const capacidad = 4
+   const velocidadMaxima = 150
    var color
-   var peso
+   const peso = 1300
 }
 
-const chevroletCorsa = new Rodado(4, 150, negro, 1300)
+const chevroletCorsa = new Rodado(color = negro)
+
+class RenaultKwid {
+   var capacidad 
+   var velocidadMaxima 
+   const color = azul 
+   var peso
+}
