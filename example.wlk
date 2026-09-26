@@ -1,54 +1,102 @@
 class ChevroletCorsa {
-   const capacidad = 4
-   const velocidadMaxima = 150
-   var color
-   const peso = 1300
+  const property color
+  method capacidad() = 4
+  method velocidadMaxima() = 150
+  method peso() = 1300
 }
 
-const chevroletCorsa = new Rodado(color = negro)
+const chevroletCorsa = new ChevroletCorsa(color = "negro")
 
 class RenaultKwid {
-   var capacidad 
-   var velocidadMaxima 
-   const color = azul 
-   var peso
+  const tieneTanqueAdicional
+  const property color = "azul"
+
+  method capacidad() {
+    if (not tieneTanqueAdicional) {
+      return 4
+    }
+    else {
+      return 3
+    }
+  }
+
+  method velocidadMaxima() {
+    if (tieneTanqueAdicional) {
+      return 120
+    }
+    else {
+      return 110
+    }
+  }
+
+  method peso() {
+    if (tieneTanqueAdicional) {
+      return 1200 + 150
+    }
+    else {
+      return 1200
+    }
+  }
 }
 
 object trafic {
-  const property color = blanco 
-  const peso = 4000
-  var interiorComodo = true
-  var motorPulenta = true
-  method capacidad() {
-    if (interiorComodo) {
-      return 5
-    }
-    else {
-      return 12
-    }
+  const property color = "blanco"
+  var interior = interiorComodo
+  var motor = motorPulenta
+
+  method cambiarInterior(nuevoInterior) {
+    interior = nuevoInterior
   }
-  method velocidadMaxima() {
-    if (motorPulenta) {
-      return 130
-    }
-    else {
-      return 80
-    }
+
+  method cambiarMotor(nuevoMotor) {
+    motor = nuevoMotor
   }
-  method pesoInterior() {
-    if (interiorComodo) {
-      return 700
-    }
-    else {
-      return 1000
-    }
+
+  method capacidad() = interior.capacidad() 
+  method velocidadMaxima() = motor.velocidadMaxima()
+  method peso() = 4000 + interior.peso() + motor.peso()
+}
+
+object interiorComodo {
+  method capacidad() = 5
+  method peso() = 700  
+}
+
+object interiorPopular {
+  method capacidad() = 12
+  method peso() = 1000 
+}
+
+object motorPulenta {
+  method peso() = 800
+  method velocidadMaxima() = 130
+}
+
+object motorBataton {
+  method peso() = 500
+  method velocidadMaxima() = 80
+}
+
+class AutoEspecial {
+  const property capacidad
+  const property velocidadadMaxima
+  const property peso
+  const property color 
+}
+
+class Dependencia {
+  const property flota = []
+  method agregarAFlota(rodado) {
+    flota.add(rodado)
   }
-  method pesoMotor() {
-    if (motorPulenta) {
-      return 800
-    }
-    else {
-      return 500
-    }
+
+  method quitarDeFlota(rodado) {
+    flota.remove(rodado)
   }
-  method peso() = peso + self.pesoInterior() + self.pesoMotor()
+
+  method pesoTotalFlota() = flota.sum({r => r.peso()})
+  method estaBienEquipada() = flota.size() >= 3 and flota.all({r => r.velocidadMaxima() >= 100})
+  method capacidadTotalEnColor(color) = flota.sum({r => (r.color() == color).capacidad()})
+  method colorDelRodadoMasRapido() = "color"
+  method esGrande() = true
+}
